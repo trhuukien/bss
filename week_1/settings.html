@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Settings</title>
+
+</head>
+
+<body onload="check_login()">
+    <!-- Content NULL -->
+    <div class="content">
+        <nav id="nav">
+            <div class="heading-active">
+                <i class="fas fa-tablet-alt"></i>
+                <span>Device Management</span>
+            </div>
+            <ul>
+                <li>
+                    <i class="fas fa-tv"></i>
+                    <a href="dashboard.html">Dashboard</a>
+                </li>
+                <li>
+                    <i class="fas fa-history"></i>
+                    <a href="logs.html">Logs</a>
+                </li>
+                <li>
+                    <i class="fas fa-cog"></i>
+                    <a href="settings.html" class="active">Settings</a>
+                </li>
+                <li>
+                    <button onclick="logout()" class="btn" style="background: red;">Logout</button>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <header id="header">
+                <span id="btn-nav" class="nav-mobile" onclick="click_nav(1)">
+                    <i class="fas fa-stream"></i>
+                </span>
+                <div id="user" class="user-active">
+                    <img src="assets/img/avatar_kiz.jpg" alt="" width="40px" height="40px">
+                    <span>Welcom <b id="user_name"></b></span>
+                </div>
+            </header>
+            <main onclick="click_nav(0)">
+            </main>
+        </div>
+    </div>
+    <!-- End Content NULL -->
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

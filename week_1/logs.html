@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <title>Logs</title>
+
+</head>
+
+<body onload="check_login()">
+    <div class="content">
+        <!-- Menu -->
+        <nav id="nav">
+            <div class="heading-active">
+                <i class="fas fa-tablet-alt"></i>
+                <span>Device Management</span>
+            </div>
+            <ul>
+                <li>
+                    <i class="fas fa-tv"></i>
+                    <a href="dashboard.html">Dashboard</a>
+                </li>
+                <li>
+                    <i class="fas fa-history"></i>
+                    <a href="logs.html" class="active">Logs</a>
+                </li>
+                <li>
+                    <i class="fas fa-cog"></i>
+                    <a href="settings.html">Settings</a>
+                </li>
+                <li>
+                    <button onclick="logout()" class="btn" style="background: red;">Logout</button>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Menu -->
+        <div>
+            <!-- Header -->
+            <header id="header">
+                <span id="btn-nav" class="nav-mobile" onclick="click_nav(1)">
+                    <i class="fas fa-stream"></i>
+                </span>
+                <div id="user" class="user-active">
+                    <img src="assets/img/avatar_kiz.jpg" alt="" width="40px" height="40px">
+                    <span>Welcom <b id="user_name"></b></span>
+                </div>
+            </header>
+            <!-- End Header -->
+
+            <!-- Content -->
+            <main onclick="click_nav(0)">
+                <div class="mx-200px">
+                    <div class="row">
+                        <div class="d-flex align-items-center justify-content-between p-0">
+                            <h3>ACTION LOG</h3>
+                            <form action="" class="d-flex align-items-center" onsubmit="search(event)">
+                                <input class="input-active" style="background-color: #EAE1E1; height: auto;"
+                                    height="20px" type="text" name="" id="name" placeholder="name">
+                                <button type="submit" class="btn mx-3">Search</button>
+                            </form>
+                        </div>
+                        <table class="table mx-auto bg-white rounded mt-3" style="line-height: 40px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Device ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="load_data">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content-center align-items-center" id="page">
+
+                    </div>
+                </div>
+            </main>
+            <!-- End Content -->
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/logs.js"></script>
+</body>
+
+</html>
