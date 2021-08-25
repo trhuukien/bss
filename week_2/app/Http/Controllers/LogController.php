@@ -12,7 +12,11 @@ class LogController extends Controller
     public function index(Request $req)
     {
         isset($req->search) ? $key = $req->search : $key = '';
-        isset($req->page) ? $p = $req->page : $p = 1;
+        if ($req->page > 2 && is_numeric($req->page)) {
+            $p = $req->page;
+        } else {
+            $p = 5;
+        }
         if ($req->page_size > 2 && is_numeric($req->page_size)) {
             $pz = $req->page_size;
         } else {
@@ -46,7 +50,7 @@ class LogController extends Controller
                 'action' => 'required',
                 'date' => [
                     'required',
-                    'date',
+                    'date_format:Y-m-d'
                 ],
             ],
             [
@@ -55,7 +59,7 @@ class LogController extends Controller
                 'name.unique' => 'Tên này đã tồn tại!',
                 'action.required' => 'Hãy nhập trường này!',
                 'date.required' => 'Hãy nhập trường này!',
-                'date.date' => 'Định dạng chuẩn: ngày - tháng - năm!',
+                'date.date_format' => 'Định dạng ngày không đúng!',
             ]
         );
 
