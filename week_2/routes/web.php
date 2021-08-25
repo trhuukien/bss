@@ -27,8 +27,16 @@ Route::post('login', [HomeController::class, 'postLogin']);
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::post('dashboard', [DashboardController::class, 'add'])->middleware('auth');
+Route::get('dashboard/delete/{id}', [DashboardController::class, 'delete'])->name('dashboard.delete')->middleware('auth');
 
 Route::get('log', [LogController::class, 'index'])->name('log')->middleware('auth');
+Route::get('log/add', [LogController::class, 'add'])->name('log.add')->middleware('auth');
+Route::post('log/add', [LogController::class, 'postAdd'])->middleware('auth');
+Route::get('log/delete/{id}', [LogController::class, 'delete'])->name('log.delete')->middleware('auth');
+
+Route::get('setting', [HomeController::class, 'setting'])->name('setting')->middleware('auth');
+Route::post('setting', [HomeController::class, 'postSetting'])->name('setting')->middleware('auth');
+
 Route::get('logout', function () {
     Auth::logout();
     return redirect((route('login')));

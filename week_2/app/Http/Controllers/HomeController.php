@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,5 +20,44 @@ class HomeController extends Controller
         } else {
             return redirect()->back()->with('msg', 'Tài khoản hoặc mật khẩu không chính xác!');
         }
+    }
+
+    public function setting()
+    {
+        $user = User::find(Auth::user()->id);
+        return view('setting', compact('user'));
+    }
+
+    public function postSetting(Request $req)
+    {
+        $req->validate(
+            [
+                'name' => 'required',
+                "avatar" => [
+                    'mimes:jpg,png'
+                ],
+            ],
+            [
+                'name.required' => 'Hãy nhập vào tên hiển thị!',
+                "avatar.mimes" => 'Định dạng hợp lệ: jpg, png!',
+            ]
+        );
+
+        $user = User::find(Auth::user()->id);
+
+        if (!$user) {
+            return redirect()->back();
+        }
+        $user->name = $req->name;
+
+        if ($req->hasFile('avatar')) {
+            $newFileName = uniqid() . '-' . $req->avatar->getClientOriginalName();
+            $path = $req->avatar->storeAs('public/uploads/', $newFileName);
+            $user->avatar = str_replace('public/', '', $path);
+        }
+
+        $user->save();
+
+        return redirect(route('setting'));
     }
 }

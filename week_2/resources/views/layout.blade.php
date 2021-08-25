@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title> @yield('title')</title>
 </head>
@@ -24,15 +24,15 @@
             <ul>
                 <li>
                     <i class="fas fa-tv"></i>
-                    <a href="{{route('dashboard')}}" @yield('dashboard')>Dashboard</a>
+                    <a href="{{route('dashboard')}}" class="@yield('dashboard')">Dashboards</a>
                 </li>
                 <li>
                     <i class="fas fa-history"></i>
-                    <a href="{{route('log')}}" @yield('log')>Logs</a>
+                    <a href="{{route('log')}}" class="@yield('log')">Logs</a>
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
-                    <a href="#">Settings</a>
+                    <a href="{{route('setting')}}" class="@yield('setting')">Setting</a>
                 </li>
                 <li>
                     <a href="{{route('logout')}}" class="btn" style="background: red;">Logout</a>
@@ -47,8 +47,10 @@
                     <i class="fas fa-stream"></i>
                 </span>
                 <div id="user" class="user-active">
-                    <img src="assets/img/avatar_kiz.jpg" alt="" width="40px" height="40px">
-                    <span>Welcom <b>admin</b></span>
+                    <img src="@if(Auth::user()){{asset('storage/' . Auth::user()->avatar)}}@endif" alt="" width="40px" height="40px">
+                    <span>Welcom <b> @if(Auth::user())
+                            {{Auth::user()->name}}
+                            @endif</b></span>
                 </div>
             </header>
             <!-- End Header -->
@@ -61,7 +63,7 @@
         </div>
     </div>
 
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('/')}}assets/js/main.js"></script>
 
     @yield('script')
 </body>

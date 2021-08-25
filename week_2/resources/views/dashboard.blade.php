@@ -7,6 +7,11 @@
 <div class="container">
     <div class="row">
         <br><br>
+        <span class="txt1" style="color: red; font-family: Arial, Helvetica, sans-serif;">
+            @if(session('msg'))
+            <p>{{session('msg')}}</p>
+            @endif
+        </span>
         <table class="table table-none-mobile mx-auto" style="line-height: 40px;">
             <thead>
                 <tr>
@@ -16,6 +21,7 @@
                     <th scope="col">IP</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">PC (Kw/H)</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody id="load_data22">
@@ -31,11 +37,14 @@
                         <td><?= $d['ip'] ?></td>
                         <td><?= $d['created_at'] ?></td>
                         <td><?= $d['pc'] ?></td>
+                        <td>
+                            <a style="text-decoration: none;" onclick="return(confirm('Bạn có chắc chắn muốn xóa? Toàn bộ log liên quan sẽ xóa theo!'))" href="{{route('dashboard.delete', ['id' => $d->id])}}" class="btn">Xóa</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 <tr>
                     <td><b>Total</b></td>
-                    <td colspan="4"></td>
+                    <td colspan="5"></td>
                     <td><b><?= $total ?><b></td>
                 </tr>
             </tbody>
@@ -56,10 +65,22 @@
             <form class="box" id="form-add" method="POST">
                 @csrf
                 <div class="content-box">
-                    <input class="input-active" type="text" name="device" id="name" placeholder="Name..." required>
-                    <input class="input-active" type="text" name="ip" id="ip" placeholder="IP..." required>
-                    <input class="input-active" type="text" name="mac" id="mac" placeholder="MAC..." required>
-                    <input class="input-active" type="number" name="pc" id="pc" placeholder="PC..." required>
+                    <input value="{{old('device')}}" class="input-active" type="text" name="device" id="name" placeholder="Name..." required>
+                    @error('device')
+                    <p style="text-align: left; color: red; margin: 0; font-size: 12px;">{{$message}}</p>
+                    @enderror
+                    <input value="{{old('ip')}}" class="input-active" type="text" name="ip" id="ip" placeholder="IP..." required>
+                    @error('ip')
+                    <p style="text-align: left; color: red; margin: 0; font-size: 12px;">{{$message}}</p>
+                    @enderror
+                    <input value="{{old('mac')}}" class="input-active" type="text" name="mac" id="mac" placeholder="MAC..." required>
+                    @error('mac')
+                    <p style="text-align: left; color: red; margin: 0; font-size: 12px;">{{$message}}</p>
+                    @enderror
+                    <input value="{{old('pc')}}" class="input-active" type="number" name="pc" id="pc" placeholder="PC..." required>
+                    @error('pc')
+                    <p style="text-align: left; color: red; margin: 0; font-size: 12px;">{{$message}}</p>
+                    @enderror
                     <div>
                         <button name="btn-submit" type="submit" class="btn mt-7">ADD</button>
                     </div>
